@@ -2,6 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="author" content="Pablo Robles - Operaciones Lavoro">
+<meta name="description" content="Status BSF PUNTA HERMOSA - Herramienta interna de control de unidades de transporte. Desarrollada por Pablo Robles, Operaciones Lavoro.">
+<!-- Status BSF PUNTA HERMOSA | Autor: Pablo Robles (Operaciones Lavoro) | Uso interno Lavoro. Reproduccion o distribucion sin autorizacion del autor no permitida. -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Status BSF PUNTA HERMOSA</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
@@ -320,6 +323,8 @@
   </table>
   </div><!-- /table-wrapper -->
   <div class="empty" id="emptyState" style="display:none;">No hay unidades registradas todavia.</div>
+
+  <p class="firma-autor" style="margin:14px 0 2px; font-size:10.5px; color:#B5B2A6; text-align:center; letter-spacing:0.2px;">Status BSF PUNTA HERMOSA &middot; Desarrollado por Pablo Robles &middot; Operaciones Lavoro</p>
 </div>
 </div>
 
@@ -1581,6 +1586,13 @@ var MINUTOS_SESION = 60;
     sheet.getColumn(8).width = 10;
     sheet.getColumn(9).width = 10;
 
+    // Firma de autoria al pie del reporte
+    sheet.addRow([]);
+    var firmaRow = sheet.addRow(['Desarrollado por Pablo Robles - Operaciones Lavoro | Uso interno']);
+    sheet.mergeCells('A' + firmaRow.number + ':I' + firmaRow.number);
+    firmaRow.getCell(1).font = { italic: true, size: 9, color: { argb: 'FF8A8880' }, name: 'Calibri' };
+    firmaRow.getCell(1).alignment = { horizontal: 'right' };
+
     workbook.xlsx.writeBuffer().then(function(buffer){
       var blob = new Blob([buffer], { type: 'application/octet-stream' });
       var url = URL.createObjectURL(blob);
@@ -1709,6 +1721,7 @@ var MINUTOS_SESION = 60;
           '<tbody>'+filas+'</tbody>'+
         '</table>'+
         '</div>'+
+        '<p style="margin:8px 2px 0; font-size:9px; color:#A8A49A; text-align:right; letter-spacing:0.2px;">Desarrollado por Pablo Robles &middot; Operaciones Lavoro</p>'+
       '</div>';
 
     return html;
